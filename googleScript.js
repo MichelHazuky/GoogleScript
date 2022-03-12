@@ -25,20 +25,24 @@ function doPost(e) {
 
   try {
 
-    if (dados.requisicao == 'requisitar')
+    if (dados.requisicao == 'requisitar') {
       return ContentService.createTextOutput(JSON.stringify(
         SpreadsheetApp.openByUrl(dados.link).getSheetByName(dados.pagina).getRange(dados.celulas).getValues()
       ));
 
-    if (dados.requisicao == 'enviar')
-      SpreadsheetApp.openByUrl(dados.link).getSheetByName(dados.pagina).appendRow(dados.informacoes)
-    return ContentService.createTextOutput(JSON.stringify({ text: "sucesso" })).setMimeType(ContentService.MimeType.JSON);
+    } else if (dados.requisicao == 'enviar') {
+      SpreadsheetApp.openByUrl(dados.link).getSheetByName(dados.pagina).appendRow(dados.informacoes)// o metodo appendRow insere uma nova linha na pagina com todos os dados enviados
+      return ContentService.createTextOutput(JSON.stringify({ text: "sucesso" })).setMimeType(ContentService.MimeType.JSON);
+
+    } else {
+      return ContentService.createTextOutput(JSON.stringify({ text: "tipo de requisicao invalida" })).setMimeType(ContentService.MimeType.JSON);
+    
+    }
 
   } catch (erro) {
-
     return ContentService.createTextOutput(JSON.stringify({ erro: erro.message })).setMimeType(ContentService.MimeType.JSON);
 
   }
 
-
 }
+

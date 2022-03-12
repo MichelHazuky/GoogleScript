@@ -8,7 +8,7 @@ function enviarDadosParaPlanilha() {
 
     method: 'post', // metodo POST sempre
 
-    // passe os parametros abaixo para que o google Script possa inserir os dados corretamente
+    // passe os parametros abaixo para que o google Script possa requisitar os dados
     body: JSON.stringify({
       link: 'cole aqui o link completo da sua planilha',
       pagina: 'nome da pagina que receberá os dados',
